@@ -11,9 +11,12 @@ const updateTodo = (db) => {
     { $set: (
         {"Todo" : "Pratices Node + Mongodb", "Department": "Personal growth", "completed":true}
     )},
-    { upsert: true }
-    )
-    console.log('successfully updated')
+    { upsert: false },
+    { returnOriginal: false}
+    ).then((result) => {
+        console.log('successfully updated')
+        console.log(result)
+    }).catch(err => console.log(err))
 }
 
 MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
